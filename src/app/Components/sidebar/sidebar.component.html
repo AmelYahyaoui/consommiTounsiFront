@@ -23,7 +23,7 @@
                                    with font-awesome or any other icon font library -->
 
           <li
-            *ngFor="let category of categories; let index = index"
+            *ngFor="let category of sidebar; let index = index"
             class="nav-item"
           >
             <a class="nav-link">
@@ -50,7 +50,7 @@
                     class="far fa-circle nav-icon"
                   ></i>
                   <p>
-                    {{ underCategory.underCategory }}
+                    {{ underCategory.underCategory.nameUnderCategory }}
                     <i
                       *ngIf="underCategory.products.length"
                       class="right fas fa-angle-left"
@@ -66,7 +66,9 @@
                     class="nav-item"
                   >
                     <a href="/home/one-product" class="nav-link">
-                      <p style="margin-left: 50px">{{ product.name }}</p>
+                      <p style="margin-left: 50px">
+                        {{ product.titleProduct }}
+                      </p>
                     </a>
                   </li>
                 </ul>

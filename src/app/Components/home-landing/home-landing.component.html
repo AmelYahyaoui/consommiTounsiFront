@@ -3,7 +3,7 @@
     <!-- small box -->
     <div class="small-box bg-info" bis_skin_checked="1">
       <div class="inner" bis_skin_checked="1">
-        <h3>150</h3>
+        <h3 *ngIf="categories">{{ categories.length }}</h3>
 
         <p>Catégories</p>
       </div>
@@ -20,7 +20,7 @@
     <!-- small box -->
     <div class="small-box bg-success" bis_skin_checked="1">
       <div class="inner" bis_skin_checked="1">
-        <h3>53</h3>
+        <h3 *ngIf="undercategories">{{ undercategories.length }}</h3>
 
         <p>Sous-Catégories</p>
       </div>
@@ -37,7 +37,7 @@
     <!-- small box -->
     <div class="small-box bg-warning" bis_skin_checked="1">
       <div class="inner" bis_skin_checked="1">
-        <h3>44</h3>
+        <h3 *ngIf="products">{{ products.length }}</h3>
 
         <p>Produits</p>
       </div>
@@ -54,7 +54,7 @@
     <!-- small box -->
     <div class="small-box bg-danger" bis_skin_checked="1">
       <div class="inner" bis_skin_checked="1">
-        <h3>65</h3>
+        <h3 *ngIf="publicity">{{ publicity.length }}</h3>
 
         <p>Publicités</p>
       </div>
