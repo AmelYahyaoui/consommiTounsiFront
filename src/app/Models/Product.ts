@@ -11,7 +11,7 @@ export class Product {
   maxQuantityProduct: number;
   fileName: string;
   barcodeProduct: object;
-  UnderCategory: UnderCategory;
+  underCategory: UnderCategory;
   likes: number;
   reduction: number;
 }

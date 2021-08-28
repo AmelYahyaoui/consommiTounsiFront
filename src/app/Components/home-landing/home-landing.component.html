@@ -4,7 +4,7 @@
     <div class="small-box bg-info" bis_skin_checked="1">
       <div class="inner" bis_skin_checked="1">
         <h3 *ngIf="categories">{{ categories.length }}</h3>
-
+        <h3 *ngIf="!categories">0</h3>
         <p>Catégories</p>
       </div>
       <div class="icon" bis_skin_checked="1">
@@ -21,7 +21,7 @@
     <div class="small-box bg-success" bis_skin_checked="1">
       <div class="inner" bis_skin_checked="1">
         <h3 *ngIf="undercategories">{{ undercategories.length }}</h3>
-
+        <h3 *ngIf="!undercategories">0</h3>
         <p>Sous-Catégories</p>
       </div>
       <div class="icon" bis_skin_checked="1">
@@ -38,7 +38,7 @@
     <div class="small-box bg-warning" bis_skin_checked="1">
       <div class="inner" bis_skin_checked="1">
         <h3 *ngIf="products">{{ products.length }}</h3>
-
+        <h3 *ngIf="!products">0</h3>
         <p>Produits</p>
       </div>
       <div class="icon" bis_skin_checked="1">
@@ -55,7 +55,7 @@
     <div class="small-box bg-danger" bis_skin_checked="1">
       <div class="inner" bis_skin_checked="1">
         <h3 *ngIf="publicity">{{ publicity.length }}</h3>
-
+        <h3 *ngIf="!publicity">0</h3>
         <p>Publicités</p>
       </div>
       <div class="icon" bis_skin_checked="1">

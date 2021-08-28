@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -38,7 +38,7 @@ const appRoutes: Routes = [
         component: ProductAdminComponent,
       },
       {
-        path: 'one-product',
+        path: 'one-product/:id',
         component: OneProductComponent,
       },
       {

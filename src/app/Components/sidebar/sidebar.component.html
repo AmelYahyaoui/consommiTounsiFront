@@ -1,7 +1,7 @@
 <div class="wrapper">
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="/home" class="brand-link">
+    <a [routerLink]="['/home']" class="brand-link">
       <img
         src="assets/consommiTounsi.png"
         alt="AdminLTE Logo"
@@ -55,6 +55,11 @@
                       *ngIf="underCategory.products.length"
                       class="right fas fa-angle-left"
                     ></i>
+                    <span
+                      *ngIf="!underCategory.products.length"
+                      class="badge badge-info right"
+                      >0</span
+                    >
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
@@ -65,7 +70,10 @@
                     "
                     class="nav-item"
                   >
-                    <a href="/home/one-product" class="nav-link">
+                    <a
+                      [routerLink]="['/home/one-product', product.idProduct]"
+                      class="nav-link"
+                    >
                       <p style="margin-left: 50px">
                         {{ product.titleProduct }}
                       </p>
@@ -76,7 +84,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="/home/ads" class="nav-link">
+            <a  [routerLink]="['/home/ads']" class="nav-link">
               <i class="fab fa-adversal nav-icon"></i>
               <p>Publicités</p>
             </a>

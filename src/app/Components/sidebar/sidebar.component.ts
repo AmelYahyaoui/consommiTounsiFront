@@ -67,6 +67,7 @@ export class SidebarComponent implements OnInit {
         for (var i = 0; i < this.undercategories.length; i++) {
           var underCategory = this.undercategories[i];
           var category = this.undercategories[i].category;
+
           if (this.rightType(final, category) == null) {
             final.push({
               category: category.nameCategory,
@@ -76,13 +77,15 @@ export class SidebarComponent implements OnInit {
           this.underCategService
             .getProdsByIdUnderCat(this.undercategories[i].idUnderCategory)
             .subscribe(
-              (res: Array<Object>) => {
-                final = this.fixUnderCategory(
-                  final,
-                  category,
-                  underCategory,
-                  res
-                );
+              (res: Array<Product>) => {
+                if (res.length) {
+                  final = this.fixUnderCategory(
+                    final,
+                    res[0].underCategory.category,
+                    res[0].underCategory,
+                    res
+                  );
+                }
 
                 this.sidebar = final;
               },
