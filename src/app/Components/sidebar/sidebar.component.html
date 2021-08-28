@@ -1,0 +1,88 @@
+<div class="wrapper">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="/home" class="brand-link">
+      <img
+        src="assets/consommiTounsi.png"
+        alt="AdminLTE Logo"
+        class="brand-image img-circle elevation-3"
+        style="opacity: 0.8"
+      />
+      <span class="brand-text font-weight-light">Consommi Tounsi</span>
+    </a>
+
+    <div class="sidebar">
+      <nav class="mt-2">
+        <ul
+          class="nav nav-pills nav-sidebar flex-column"
+          data-widget="treeview"
+          role="menu"
+          data-accordion="false"
+        >
+          <!-- Add icons to the links using the .nav-icon class
+                                   with font-awesome or any other icon font library -->
+
+          <li
+            *ngFor="let category of categories; let index = index"
+            class="nav-item"
+          >
+            <a class="nav-link">
+              <i class="far fa-dot-circle nav-icon"></i>
+              <p>
+                {{ category.category }}
+                <i
+                  *ngIf="category.underCategories.length"
+                  class="right fas fa-angle-left"
+                ></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li
+                *ngFor="
+                  let underCategory of category.underCategories;
+                  let index = index
+                "
+                class="nav-item"
+              >
+                <a class="nav-link">
+                  <i
+                    style="margin-left: 25px"
+                    class="far fa-circle nav-icon"
+                  ></i>
+                  <p>
+                    {{ underCategory.underCategory }}
+                    <i
+                      *ngIf="underCategory.products.length"
+                      class="right fas fa-angle-left"
+                    ></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li
+                    *ngFor="
+                      let product of underCategory.products;
+                      let index = index
+                    "
+                    class="nav-item"
+                  >
+                    <a href="/home/one-product" class="nav-link">
+                      <p style="margin-left: 50px">{{ product.name }}</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="/home/ads" class="nav-link">
+              <i class="fab fa-adversal nav-icon"></i>
+              <p>Publicités</p>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+</div>
