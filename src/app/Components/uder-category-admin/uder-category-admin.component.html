@@ -3,7 +3,13 @@
     <div class="card">
       <div class="card-header">
         <h3 class="card-title">Sous-Catégories</h3>
-        <button style="float:right" type="button" class="btn btn-info">
+        <button
+          style="float: right"
+          type="button"
+          class="btn btn-info"
+          data-toggle="modal"
+          data-target="#modal-default"
+        >
           <i class="fas fa-plus" style="margin: 0 10px 0 0"></i>Ajouter
         </button>
       </div>
@@ -18,7 +24,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let undercategory of undercategories; let index = index">
+            <tr
+              *ngFor="let undercategory of undercategories; let index = index"
+            >
               <td>{{ undercategory.idUnderCategory }}</td>
               <td>{{ undercategory.category.nameCategory }}</td>
               <td>{{ undercategory.nameUnderCategory }}</td>
@@ -34,6 +42,7 @@
                   type="button"
                   style="margin: 0 10px"
                   class="btn btn-danger"
+                  (click)="deleteUnderCategory()"
                 >
                   <i class="fas fa-trash"></i>
                 </button>
@@ -42,6 +51,89 @@
           </tbody>
         </table>
       </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="modal-default"
+  style="display: none"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Ajouter une sous-catégorie</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="contactForm" (ngSubmit)="submit()">
+          <label>
+            Nom sous-catégorie:
+            <input
+              type="text"
+              class="form-control"
+              formControlName="nameUnderCategory"
+            />
+          </label>
+          <br />
+          <p>
+            <select formControlName="category" class="form-control">
+              <option [ngValue]="null" disabled>choix categorie</option>
+              <option
+                *ngFor="let category of categories"
+                [ngValue]="category.idCategory"
+              >
+                {{ category.nameCategory }}
+              </option>
+            </select>
+
+            <button
+              type="submit"
+              
+              style="float: right; margin-top: 10px"
+              class="btn btn-info toastsDefaultSuccess"
+            >
+              Ajouter
+            </button>
+          </p>
+        </form>
+
+        <div class="modal-footer justify-content-between"></div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+</div>
+<div id="toastsContainerTopRight" class="toasts-top-right fixed"
+*ngIf="show">
+  <div
+    class="toast bg-success fade show"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+  >
+    <div class="toast-header">
+      <strong class="mr-auto">Ajout</strong><small></small
+      ><button
+        (click)="toggelToast()"
+        type="button"
+        class="ml-2 mb-1 close"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="toast-body">
+      Votre sous-Catégorie est ajoutée avec succées !
     </div>
   </div>
 </div>

@@ -3,7 +3,13 @@
     <div class="card">
       <div class="card-header">
         <h3 class="card-title">Produits</h3>
-        <button style="float: right" type="button" class="btn btn-info">
+        <button
+          style="float: right"
+          data-toggle="modal"
+          data-target="#modal-default"
+          type="button"
+          class="btn btn-info"
+        >
           <i class="fas fa-plus" style="margin: 0 10px 0 0"></i>Ajouter
         </button>
       </div>
@@ -44,6 +50,7 @@
                   type="button"
                   style="margin: 0 10px"
                   class="btn btn-danger"
+                  (click)="deleteProduct(product)"
                 >
                   <i class="fas fa-trash"></i>
                 </button>
@@ -53,5 +60,72 @@
         </table>
       </div>
     </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="modal-default"
+  style="display: none"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Ajouter un Produit</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="contactForm" (ngSubmit)="submit()">
+          <label>
+            Titre du produit:
+            <input
+              type="text"
+              class="form-control"
+              formControlName="titleProduct"
+            />
+          </label>
+          <br />
+          <p>
+            <select
+              formControlName="underCategoryIdUnderCategory"
+              class="form-control"
+            >
+              <option [ngValue]="null" disabled>Choix Sous-Catégorie</option>
+              <option
+                *ngFor="let undercategory of undercategories"
+                [ngValue]="undercategory.idUnderCategory"
+              >
+                {{ undercategory.nameUnderCategory }}
+              </option>
+            </select>
+            <input
+              type="file"
+              class="form-control"
+              name="file"
+              formControlName="fileName"
+              required
+            />
+            <button
+              type="submit"
+              style="float: right; margin-top: 10px"
+              class="btn btn-info toastsDefaultSuccess"
+            >
+              Ajouter
+            </button>
+          </p>
+        </form>
+
+        <div class="modal-footer justify-content-between"></div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
   </div>
 </div>

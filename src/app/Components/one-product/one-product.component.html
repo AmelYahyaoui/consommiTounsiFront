@@ -1,4 +1,4 @@
-<section class="content">
+<section class="content" *ngIf="product">
   <!-- Default box -->
   <div class="card card-solid" bis_skin_checked="1">
     <div class="card-body" bis_skin_checked="1">
@@ -6,7 +6,10 @@
         <div class="col-12 col-sm-6" bis_skin_checked="1">
           <div class="col-12" bis_skin_checked="1">
             <img
-              src="../../dist/img/prod-1.jpg"
+              src="{{
+                'http://localhost:9091/SpringMVC/servlet/Imgarticles/' +
+                product.idProduct
+              }}"
               class="product-image"
               alt="Product Image"
             />

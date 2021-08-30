@@ -1,93 +1,212 @@
-<div class="row" bis_skin_checked="1">
-    <div class="col-12" bis_skin_checked="1">
-      <div class="card" bis_skin_checked="1">
-        <div class="card-header" bis_skin_checked="1">
-          <h3 class="card-title">Fixed Header Table</h3>
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Publicités</h3>
+        <button
+          style="float: right"
+          type="button"
+          class="btn btn-info"
+          data-toggle="modal"
+          data-target="#modal-default"
+        >
+          <i class="fas fa-plus" style="margin: 0 10px 0 0"></i>Ajouter
+        </button>
+      </div>
+      <div class="card-body">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th style="width: 10px">ID</th>
+              <th style="width: 10px">canal Publicité</th>
+              <th>Prix Pub</th>
+              <th>Description</th>
+              <th>Nom pub</th>
+              <th>date debut</th>
+              <th>date fin</th>
+              <th>Email</th>
+              <th>téléphone</th>
+              <th>Type</th>
+              <th>cible pub</th>
+              <th>status pub</th>
+              <th style="width: 150px">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pub of publicities; let index = index">
+              <td>{{ pub.idPublicity }}</td>
+              <td>{{ pub.channelPublicity }}</td>
+              <td>{{ pub.costPublicity }}</td>
+              <td>{{ pub.descriptionPublicity }}</td>
+              <td>{{ pub.namePublicity }}</td>
+              <td>{{ pub.startDatePublicity }}</td>
+              <td>{{ pub.endDatePublicity }}</td>
+              <td>{{ pub.mailOwnerPublicity }}</td>
+              <td>{{ pub.phoneOwnerPublicity }}</td>
+              <td>{{ pub.typePublicity }}</td>
+              <td>{{ pub.targetPublicity }}</td>
+              <td *ngIf="pub.statusPublicity">
+                <span class="right badge badge-success">active</span>
+              </td>
+              <td *ngIf="!pub.statusPublicity">
+                <span class="right badge badge-danger">non-active</span>
+              </td>
+              <td>
+                <button
+                  type="button"
+                  style="margin: 0 10px"
+                  class="btn btn-success"
+                >
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button
+                  type="button"
+                  style="margin: 0 10px"
+                  class="btn btn-danger"
+                  (click)="deletePublicity(pub)"
+                >
+                  <i class="fas fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="modal-default"
+  style="display: none"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Ajouter une publicité</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="contactForm" (ngSubmit)="submit()">
+          <label>
+            Nom Publicité:
+            <input
+              type="text"
+              class="form-control"
+              formControlName="namePublicity"
+            />
+          </label>
+          <br />
 
-          <div class="card-tools" bis_skin_checked="1">
-            <div class="input-group input-group-sm" style="width: 150px;" bis_skin_checked="1">
-              <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+          <select formControlName="channelPublicity" class="form-control">
+            <option [ngValue]="null" disabled>choix canal</option>
+            <option *ngFor="let category of channels" [ngValue]="category">
+              {{ category }}
+            </option>
+          </select>
+          <br />
+          <select formControlName="targetPublicity" class="form-control">
+            <option [ngValue]="null" disabled>choix cible</option>
+            <option *ngFor="let category of cibles" [ngValue]="category">
+              {{ category }}
+            </option>
+          </select>
+          <br />
+          <select formControlName="initialViewNumber" class="form-control">
+            <option [ngValue]="null" disabled>choix Vue initiale</option>
+            <option
+              *ngFor="let category of numberInitialViews"
+              [ngValue]="category"
+            >
+              {{ category }}
+            </option>
+          </select>
+          <br />
 
-              <div class="input-group-append" bis_skin_checked="1">
-                <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+          <label> numéro de téléphone:</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-phone"></i></span>
+            </div>
+            <input
+              type="number"
+              formControlName="phoneOwnerPublicity"
+              class="form-control"
+            />
+          </div>
+          <br />
+          <label> Email:</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"
+                ><i class="fas fa-envelope"></i
+              ></span>
+            </div>
+            <input
+              type="text"
+              formControlName="mailOwnerPublicity"
+              class="form-control"
+            />
+          </div>
+
+          <br />
+          <label>
+            Date début:
+            <input
+              type="date"
+              class="form-control"
+              formControlName="startDatePublicity"
+            />
+          </label>
+          <br />
+          <label>
+            Date fin:
+            <input
+              type="date"
+              class="form-control"
+              formControlName="endDatePublicity"
+            />
+          </label>
+          <br />
+          <div class="form-group">
+            <label for="fileName">Image Publicité</label>
+            <div class="input-group">
+              <div class="custom-file">
+                <input
+                  type="file"
+                  class="custom-file-input"
+                  formControlName="fileName"
+                  id="fileName"
+                />
+                <label class="custom-file-label">Choisir</label>
+              </div>
+              <div class="input-group-append">
+                <span class="input-group-text" id="">Upload</span>
               </div>
             </div>
           </div>
-        </div>
-        <!-- /.card-header -->
-        <div class="card-body table-responsive p-0" style="height: 300px;" bis_skin_checked="1">
-          <table class="table table-head-fixed">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>User</th>
-                <th>Date</th>
-                <th>Status</th>
-                <th>Reason</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>183</td>
-                <td>John Doe</td>
-                <td>11-7-2014</td>
-                <td><span class="tag tag-success">Approved</span></td>
-                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-              </tr>
-              <tr>
-                <td>219</td>
-                <td>Alexander Pierce</td>
-                <td>11-7-2014</td>
-                <td><span class="tag tag-warning">Pending</span></td>
-                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-              </tr>
-              <tr>
-                <td>657</td>
-                <td>Bob Doe</td>
-                <td>11-7-2014</td>
-                <td><span class="tag tag-primary">Approved</span></td>
-                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-              </tr>
-              <tr>
-                <td>175</td>
-                <td>Mike Doe</td>
-                <td>11-7-2014</td>
-                <td><span class="tag tag-danger">Denied</span></td>
-                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-              </tr>
-              <tr>
-                <td>134</td>
-                <td>Jim Doe</td>
-                <td>11-7-2014</td>
-                <td><span class="tag tag-success">Approved</span></td>
-                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-              </tr>
-              <tr>
-                <td>494</td>
-                <td>Victoria Doe</td>
-                <td>11-7-2014</td>
-                <td><span class="tag tag-warning">Pending</span></td>
-                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-              </tr>
-              <tr>
-                <td>832</td>
-                <td>Michael Doe</td>
-                <td>11-7-2014</td>
-                <td><span class="tag tag-primary">Approved</span></td>
-                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-              </tr>
-              <tr>
-                <td>982</td>
-                <td>Rocky Doe</td>
-                <td>11-7-2014</td>
-                <td><span class="tag tag-danger">Denied</span></td>
-                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <!-- /.card-body -->
+          <br />
+          <button
+            type="submit"
+            style="float: right; margin-top: 10px"
+            class="btn btn-info toastsDefaultSuccess"
+          >
+            Ajouter
+          </button>
+        </form>
+
+        <div class="modal-footer justify-content-between"></div>
       </div>
-      <!-- /.card -->
+      <!-- /.modal-content -->
     </div>
+    <!-- /.modal-dialog -->
   </div>
+</div>

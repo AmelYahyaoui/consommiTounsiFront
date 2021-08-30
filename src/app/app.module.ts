@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, } from '@angular/core';
+import { NgModule } from '@angular/core';
+
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +16,9 @@ import { UderCategoryAdminComponent } from './Components/uder-category-admin/ude
 import { PublicityAdminComponent } from './Components/publicity-admin/publicity-admin.component';
 import { OneProductComponent } from './Components/one-product/one-product.component';
 import { HomeLandingComponent } from './Components/home-landing/home-landing.component';
+import { AddCategoryFormComponent } from './Components/add-category-form/add-category-form.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ProductsViewAllComponent } from './Components/products-view-all/products-view-all.component';
 
 const appRoutes: Routes = [
   {
@@ -45,6 +49,14 @@ const appRoutes: Routes = [
         path: 'ads',
         component: PublicityAdminComponent,
       },
+      {
+        path: 'add-category',
+        component: AddCategoryFormComponent,
+      },
+      {
+        path: 'all-products',
+        component: ProductsViewAllComponent,
+      },
     ],
   },
   { path: 'login', component: LoginComponent },
@@ -65,12 +77,16 @@ const appRoutes: Routes = [
     PublicityAdminComponent,
     OneProductComponent,
     HomeLandingComponent,
+    AddCategoryFormComponent,
+    ProductsViewAllComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

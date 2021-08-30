@@ -3,7 +3,14 @@
     <div class="card">
       <div class="card-header">
         <h3 class="card-title">Catégories</h3>
-        <button style="float:right" type="button" class="btn btn-info">
+
+        <button
+          style="float: right"
+          type="button"
+          class="btn btn-info"
+          data-toggle="modal"
+          data-target="#modal-default"
+        >
           <i class="fas fa-plus" style="margin: 0 10px 0 0"></i>Ajouter
         </button>
       </div>
@@ -25,6 +32,9 @@
                   type="button"
                   style="margin: 0 10px"
                   class="btn btn-success"
+                  data-toggle="modal"
+                  data-target="#modal-default"
+                  (click)="setCategory(category)"
                 >
                   <i class="fas fa-edit"></i>
                 </button>
@@ -32,6 +42,7 @@
                   type="button"
                   style="margin: 0 10px"
                   class="btn btn-danger"
+                  (click)="deleteCategory(category)"
                 >
                   <i class="fas fa-trash"></i>
                 </button>
@@ -41,5 +52,101 @@
         </table>
       </div>
     </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="modal-default"
+  style="display: none"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" *ngIf="!edit">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Ajouter une catégorie</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #codeForm="ngForm" name="form">
+          <label>Nom: </label>
+          <div class="input-group input-group-sm">
+            <input
+              type="text"
+              name="nameCategory"
+              placeholder="Nom Catégorie"
+              class="form-control"
+              ngModel
+            />
+
+            <span class="input-group-append">
+              <button
+                type="button"
+                class="btn btn-info btn-flat"
+                (click)="addCategory()"
+                data-dismiss="modal"
+              >
+                Ajouter
+              </button>
+            </span>
+          </div>
+        </form>
+
+        <div class="modal-footer justify-content-between"></div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <div class="modal-dialog" *ngIf="edit">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modifier une catégorie</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form (submit)="editCategory()" #codeForm2="ngForm" name="form2">
+          <label>Nom: </label>
+          <div class="input-group input-group-sm">
+            <input
+              *ngIf="category"
+              type="text"
+              name="nameCategory"
+              placeholder="Nom Catégorie"
+              class="form-control"
+              #nameCategory
+              [(ngModel)]="category.nameCategory"
+            />
+
+            <span class="input-group-append">
+              <button
+                type="submit"
+                class="btn btn-info btn-flat"
+              >
+                Modifier
+              </button>
+            </span>
+          </div>
+        </form>
+
+        <div class="modal-footer justify-content-between"></div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
   </div>
 </div>
