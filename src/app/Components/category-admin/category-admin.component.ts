@@ -84,8 +84,9 @@ export class CategoryAdminComponent implements OnInit {
     this.category = category;
     this.edit = true;
   }
+
   //edit Category
-  editCategory(category) {
+  editCategory() {
     this.category.nameCategory = this.codeForm2.value.nameCategory;
     this.categService
       .updateCategory(this.category.idCategory, this.category)

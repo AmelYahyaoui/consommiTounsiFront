@@ -23,7 +23,7 @@ export class ProductAdminComponent implements OnInit {
   undercategories: Array<UnderCategory>;
   contactForm: FormGroup;
   file: File;
-  
+
   constructor(
     private prodService: ProductService,
     private underCategoryService: UnderCategoryService,

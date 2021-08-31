@@ -42,7 +42,7 @@
                   type="button"
                   style="margin: 0 10px"
                   class="btn btn-danger"
-                  (click)="deleteUnderCategory()"
+                  (click)="deleteUnderCategory(undercategory)"
                 >
                   <i class="fas fa-trash"></i>
                 </button>
@@ -97,7 +97,6 @@
 
             <button
               type="submit"
-              
               style="float: right; margin-top: 10px"
               class="btn btn-info toastsDefaultSuccess"
             >
@@ -113,8 +112,7 @@
     <!-- /.modal-dialog -->
   </div>
 </div>
-<div id="toastsContainerTopRight" class="toasts-top-right fixed"
-*ngIf="show">
+<div id="toastsContainerTopRight" class="toasts-top-right fixed" *ngIf="show">
   <div
     class="toast bg-success fade show"
     role="alert"

@@ -83,6 +83,7 @@ export class UderCategoryAdminComponent implements OnInit {
   });
   //delete uNDERcATEGORY
   deleteUnderCategory(underCategory) {
+    console.log(underCategory)
     Swal.fire({
       icon: 'warning',
       title: 'Supprimer cette sous-catégorie',
