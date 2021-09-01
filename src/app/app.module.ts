@@ -19,6 +19,10 @@ import { HomeLandingComponent } from './Components/home-landing/home-landing.com
 import { AddCategoryFormComponent } from './Components/add-category-form/add-category-form.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ProductsViewAllComponent } from './Components/products-view-all/products-view-all.component';
+import { EditProductComponent } from './components/edit-product/edit-product.component';
+import { EdiCategoryComponent } from './components/edi-category/edi-category.component';
+import { EditUnderCategoryComponent } from './components/edit-under-category/edit-under-category.component';
+import { EditPublicityComponent } from './components/edit-publicity/edit-publicity.component';
 
 const appRoutes: Routes = [
   {
@@ -57,6 +61,18 @@ const appRoutes: Routes = [
         path: 'all-products',
         component: ProductsViewAllComponent,
       },
+      {
+        path: 'edit-publicity/:id',
+        component: EditPublicityComponent,
+      },
+      {
+        path: 'edit-prod/:id',
+        component: EditProductComponent,
+      },
+      {
+        path: 'edit-under-category/:id',
+        component: EditUnderCategoryComponent,
+      },
     ],
   },
   { path: 'login', component: LoginComponent },
@@ -79,6 +95,10 @@ const appRoutes: Routes = [
     HomeLandingComponent,
     AddCategoryFormComponent,
     ProductsViewAllComponent,
+    EditProductComponent,
+    EdiCategoryComponent,
+    EditUnderCategoryComponent,
+    EditPublicityComponent,
   ],
   imports: [
     BrowserModule,

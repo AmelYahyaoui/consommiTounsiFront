@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" (click)="resetForm()">
   <div class="col-12">
     <div class="card">
       <div class="card-header">
@@ -9,6 +9,7 @@
           class="btn btn-info"
           data-toggle="modal"
           data-target="#modal-default"
+          (click)="toggelModel()"
         >
           <i class="fas fa-plus" style="margin: 0 10px 0 0"></i>Ajouter
         </button>
@@ -17,11 +18,10 @@
         <table class="table table-bordered">
           <thead>
             <tr>
-              <th style="width: 10px">ID</th>
+              <th >ID</th>
               <th style="width: 10px">canal Publicité</th>
-              <th>Prix Pub</th>
               <th>Description</th>
-              <th>Nom pub</th>
+              <th>Titre</th>
               <th>date debut</th>
               <th>date fin</th>
               <th>Email</th>
@@ -36,7 +36,7 @@
             <tr *ngFor="let pub of publicities; let index = index">
               <td>{{ pub.idPublicity }}</td>
               <td>{{ pub.channelPublicity }}</td>
-              <td>{{ pub.costPublicity }}</td>
+              
               <td>{{ pub.descriptionPublicity }}</td>
               <td>{{ pub.namePublicity }}</td>
               <td>{{ pub.startDatePublicity }}</td>
@@ -56,6 +56,7 @@
                   type="button"
                   style="margin: 0 10px"
                   class="btn btn-success"
+                  [routerLink]="['/home/edit-publicity', pub.idPublicity]"
                 >
                   <i class="fas fa-edit"></i>
                 </button>
@@ -84,7 +85,8 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Ajouter une publicité</h5>
+        <h5 *ngIf="!edit" class="modal-title">Ajouter une publicité</h5>
+        <h5 *ngIf="edit" class="modal-title">Modifier une publicité</h5>
         <button
           type="button"
           class="close"
@@ -127,6 +129,13 @@
               [ngValue]="category"
             >
               {{ category }}
+            </option>
+          </select>
+          <br />
+          <select formControlName="typePublicity" class="form-control">
+            <option [ngValue]="null" disabled>choix de type</option>
+            <option *ngFor="let pub of typesPublicity" [ngValue]="pub">
+              {{ pub }}
             </option>
           </select>
           <br />
@@ -176,23 +185,26 @@
             />
           </label>
           <br />
-          <div class="form-group">
-            <label for="fileName">Image Publicité</label>
-            <div class="input-group">
-              <div class="custom-file">
-                <input
-                  type="file"
-                  class="custom-file-input"
-                  formControlName="fileName"
-                  id="fileName"
-                />
-                <label class="custom-file-label">Choisir</label>
-              </div>
-              <div class="input-group-append">
-                <span class="input-group-text" id="">Upload</span>
-              </div>
-            </div>
-          </div>
+          <label> Description: </label>
+          <textarea
+            class="form-control"
+            formControlName="descriptionPublicity"
+            rows="4"
+            placeholder="Description..."
+            style="margin-top: 0px; margin-bottom: 0px; height: 106px"
+          >
+          </textarea>
+
+          <br />
+          <label> Image du Publicité: </label>
+          <input
+            type="file"
+            class="form-control"
+            name="file"
+            formControlName="fileName"
+            placeholder="Image du publicité"
+            required
+          />
           <br />
           <button
             type="submit"

@@ -1,1 +1,171 @@
-<p>edit-publicity works!</p>
+<form
+  form
+  (submit)="editPublicity()"
+  #codeForm="ngForm"
+  name="form"
+  *ngIf="publicity"
+>
+  <label>
+    Nom Publicité:
+    <input
+      type="text"
+      class="form-control"
+      #namePublicity
+      name="namePublicity"
+      [(ngModel)]="publicity.namePublicity"
+    />
+  </label>
+  <br />
+  <label> Choix Channel: </label><br />
+
+  <select
+    [(ngModel)]="publicity.channelPublicity"
+    #channelPublicity
+    name="channelPublicity"
+    class="form-control"
+  >
+    <option *ngFor="let category of channels" [ngValue]="category">
+      {{ category }}
+    </option>
+  </select>
+  <br />
+  <select
+    class="form-control"
+    [(ngModel)]="publicity.targetPublicity"
+    #targetPublicity
+    name="targetPublicity"
+  >
+    <option *ngFor="let category of cibles" [ngValue]="category">
+      {{ category }}
+    </option>
+  </select>
+  <br />
+  <select
+    class="form-control"
+    [(ngModel)]="publicity.initialViewNumber"
+    #initialViewNumber
+    name="initialViewNumber"
+  >
+    <option *ngFor="let category of numberInitialViews" [ngValue]="category">
+      {{ category }}
+    </option>
+  </select>
+  <br />
+  <select
+    class="form-control"
+    [(ngModel)]="publicity.typePublicity"
+    #typePublicity
+    name="typePublicity"
+  >
+    <option *ngFor="let pub of typesPublicity" [ngValue]="pub">
+      {{ pub }}
+    </option>
+  </select>
+  <br />
+
+  <label> numéro de téléphone:</label>
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="fas fa-phone"></i></span>
+    </div>
+    <input
+      type="number"
+      #phoneOwnerPublicity
+      name="phoneOwnerPublicity"
+      [(ngModel)]="publicity.phoneOwnerPublicity"
+      class="form-control"
+    />
+  </div>
+  <br />
+  <label> Email:</label>
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+    </div>
+    <input
+      type="text"
+      #mailOwnerPublicity
+      name="mailOwnerPublicity"
+      class="form-control"
+      [(ngModel)]="publicity.mailOwnerPublicity"
+    />
+  </div>
+
+  <br />
+  <label>
+    Date début:
+    <input
+      type="date"
+      class="form-control"
+      #startDatePublicity
+      name="startDatePublicity"
+      [(ngModel)]="publicity.startDatePublicity"
+    />
+  </label>
+  <br />
+  <label>
+    Date fin:
+    <input
+      type="date"
+      class="form-control"
+      #endDatePublicity
+      name="endDatePublicity"
+      [(ngModel)]="publicity.endDatePublicity"
+    />
+  </label>
+  <br />
+  <label> Description: </label>
+  <textarea
+    class="form-control"
+    #descriptionPublicity
+    name="descriptionPublicity"
+    rows="4"
+    style="margin-top: 0px; margin-bottom: 0px; height: 106px"
+    [(ngModel)]="publicity.descriptionPublicity"
+    >{{ publicity.descriptionPublicity }}
+
+  </textarea>
+
+  <br />
+  <!--<div
+    class="
+      custom-control
+      custom-switch
+      custom-switch-off-danger
+      custom-switch-on-success
+    "
+  >
+    <input type="checkbox"  [ngClass]="{ active: value }"class="custom-control-input" (change)="setValue(e.target.checked)" id="customSwitch3" />
+    <label class="custom-control-label" for="customSwitch3"
+      >Activer ou desactiver votre publicité</label
+    >
+  </div>
+  -->
+  <!--<label> Image du Publicité: </label>
+  <input
+  type="file"
+  class="form-control"
+  name="file"
+  formControlName="fileName"
+  placeholder="Image du publicité"
+  required
+/>
+          
+-->
+  <br />
+  <button
+    type="submit"
+    style="float: right; margin-top: 10px"
+    class="btn btn-info toastsDefaultSuccess"
+  >
+    Ajouter
+  </button>
+  <button
+    type="button"
+    style="float: left; margin-top: 10px"
+    class="btn btn-danger toastsDefaultSuccess"
+    (click)="redirectPub()"
+  >
+    annulé
+  </button>
+</form>

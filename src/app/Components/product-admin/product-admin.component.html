@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" (click)="resetForm()">
   <div class="col-12">
     <div class="card">
       <div class="card-header">
@@ -77,22 +77,33 @@
           class="close"
           data-dismiss="modal"
           aria-label="Close"
+          (click)="resetForm()"
         >
           <span aria-hidden="true">×</span>
         </button>
       </div>
       <div class="modal-body">
         <form [formGroup]="contactForm" (ngSubmit)="submit()">
-          <label>
-            Titre du produit:
+          <div *ngIf="!tunisianBarCode">
+            <label for="file">Veuillez choisir l'image du code à bar</label>
+            <input
+              type="file"
+              class="form-control"
+              name="file"
+              id="file"
+              placeholder="Image du code à bar"
+              (change)="fileChange($event)"
+              required
+            />
+          </div>
+          <div *ngIf="tunisianBarCode">
             <input
               type="text"
               class="form-control"
               formControlName="titleProduct"
+              placeholder="Titre du produit"
             />
-          </label>
-          <br />
-          <p>
+            <br />
             <select
               formControlName="underCategoryIdUnderCategory"
               class="form-control"
@@ -105,11 +116,14 @@
                 {{ undercategory.nameUnderCategory }}
               </option>
             </select>
+            <br />
+
             <input
               type="file"
               class="form-control"
               name="file"
               formControlName="fileName"
+              placeholder="Image du produit"
               required
             />
             <button
@@ -119,7 +133,7 @@
             >
               Ajouter
             </button>
-          </p>
+          </div>
         </form>
 
         <div class="modal-footer justify-content-between"></div>

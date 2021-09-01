@@ -23,6 +23,9 @@ export class ProductAdminComponent implements OnInit {
   undercategories: Array<UnderCategory>;
   contactForm: FormGroup;
   file: File;
+  file_upload: object;
+  tunisianBarCodeCheck: string;
+  tunisianBarCode: boolean;
 
   constructor(
     private prodService: ProductService,
@@ -61,16 +64,49 @@ export class ProductAdminComponent implements OnInit {
     );
   }
   fileChange(event: any) {
-    // Instantiate an object to read the file content
-    let reader = new FileReader();
-    // when the load event is fired and the file not empty
     if (event.target.files && event.target.files.length > 0) {
-      // Fill file variable with the file content
       this.file = event.target.files[0];
+      let body = new FormData();
+      body.append('file', this.file);
+      this.prodService.ZxingReader(body).subscribe((res) => {
+        if (Array.isArray(res['results'])) {
+          this.file_upload = res['results'][0].toString();
+          var arr = this.file_upload.toString().split('');
+          this.tunisianBarCodeCheck = arr.slice(0, 3).join('');
+          this.tunisianBarCode = this.tunisianBarCodeCheck == '857';
+          this.contactForm.value.barcodeProduct = res['results'][0].toString()
+          console.log('hereee',this.contactForm.value.barcodeProduct)
+        } else {
+          this.tunisianBarCode = false;
+        }
+        if (!this.tunisianBarCode) {
+          alert(
+            `Votre produit n'est pas Tunisien. \n Veuillez insérer un produit Tunisien`
+          );
+        }
+      });
     }
+  }
+  resetForm() {
+    this.tunisianBarCode = false;
+    this.tunisianBarCodeCheck = null;
+    this.contactForm = this.fb.group({
+      underCategoryIdUnderCategory: [null],
+      titleProduct: [null],
+      descriptionProduct: [null],
+      barcodeProduct: [null],
+      buyingPriceProduct: [null],
+      maxQuantityProduct: [null],
+      priceProduct: [null],
+      quantityProduct: [null],
+      weightProduct: [null],
+      fileName: [null],
+      barCode: [null],
+    });
   }
   //addProduct
   submit() {
+    console.log(this.contactForm.value.barcodeProduct)
     if (this.contactForm.value.fileName) {
       var startIndex =
         this.contactForm.value.fileName.indexOf('\\') >= 0
@@ -91,6 +127,7 @@ export class ProductAdminComponent implements OnInit {
       .subscribe(() =>
         this.prodService.getAllProducts().subscribe((res) => {
           this.products = res;
+          this.resetForm();
         })
       );
   }
@@ -128,4 +165,7 @@ export class ProductAdminComponent implements OnInit {
       }
     });
   }
+
+  //barCodeReader
+  checkBareCode() {}
 }

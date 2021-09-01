@@ -1,1 +1,47 @@
-<p>edit-under-category works!</p>
+<form
+  form
+  (submit)="editUnderCategory()"
+  #codeForm="ngForm"
+  name="form"
+  *ngIf="underCategory"
+>
+  <label>
+    Nom Publicité:
+    <input
+      type="text"
+      class="form-control"
+      #namePublicity
+      name="nameUnderCategory"
+      [(ngModel)]="underCategory.nameUnderCategory"
+    />
+  </label>
+  <br />
+  <label> modifier Catégorie( {{underCategory.category.nameCategory}} ): </label><br />
+
+  <select
+    [(ngModel)]="underCategory.category"
+    #category
+    name="category"
+    class="form-control"
+  >
+    <option *ngFor="let category of categories" [ngValue]="category">
+      {{ category.nameCategory }}
+    </option>
+  </select>
+  
+  <button
+    type="submit"
+    style="float: right; margin-top: 10px"
+    class="btn btn-info toastsDefaultSuccess"
+  >
+    Modifier
+  </button>
+  <button
+    type="button"
+    style="float: left; margin-top: 10px"
+    class="btn btn-danger toastsDefaultSuccess"
+    (click)="redirectUnderCategory()"
+  >
+    annulé
+  </button>
+</form>
