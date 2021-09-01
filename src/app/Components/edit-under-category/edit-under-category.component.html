@@ -5,30 +5,26 @@
   name="form"
   *ngIf="underCategory"
 >
-  <label>
-    Nom Publicité:
-    <input
-      type="text"
-      class="form-control"
-      #namePublicity
-      name="nameUnderCategory"
-      [(ngModel)]="underCategory.nameUnderCategory"
-    />
-  </label>
-  <br />
-  <label> modifier Catégorie( {{underCategory.category.nameCategory}} ): </label><br />
-
-  <select
-    [(ngModel)]="underCategory.category"
-    #category
-    name="category"
+  <label> Nom Publicité: </label>
+  <input
+    type="text"
     class="form-control"
-  >
-    <option *ngFor="let category of categories" [ngValue]="category">
-      {{ category.nameCategory }}
-    </option>
-  </select>
-  
+    #namePublicity
+    name="nameUnderCategory"
+    [(ngModel)]="underCategory.nameUnderCategory"
+  />
+  <br />
+
+  <label> Nom Catégorie: </label>
+  <input
+    type="text"
+    class="form-control"
+    disabled
+    name="category"
+    [(ngModel)]="underCategory.category.nameCategory"
+  />
+  <br />
+
   <button
     type="submit"
     style="float: right; margin-top: 10px"
@@ -42,6 +38,6 @@
     class="btn btn-danger toastsDefaultSuccess"
     (click)="redirectUnderCategory()"
   >
-    annulé
+    Annuler
   </button>
 </form>

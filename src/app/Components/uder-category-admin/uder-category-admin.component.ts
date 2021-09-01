@@ -6,7 +6,7 @@ import { UnderCategory } from '../../Models/UnderCategory';
 import { CategoryService } from '../../Services/Category/category.service';
 //MODELS
 import { Category } from '../../Models/Category';
-import { NgForm,FormBuilder,FormGroup } from '@angular/forms';
+import { NgForm, FormBuilder, FormGroup } from '@angular/forms';
 
 import Swal from 'sweetalert2';
 
@@ -17,24 +17,25 @@ import Swal from 'sweetalert2';
 })
 export class UderCategoryAdminComponent implements OnInit {
   undercategories: Array<UnderCategory>;
-  underCategory: UnderCategory = new UnderCategory;
+  underCategory: UnderCategory = new UnderCategory();
   categories: Array<Category>;
-  show:Boolean;
+  show: Boolean;
   @ViewChild('codeForm') codeForm: NgForm;
   @ViewChild('codeForm2') codeForm2: NgForm;
-  contactForm:FormGroup;
+  contactForm: FormGroup;
   constructor(
     private underCategService: UnderCategoryService,
-    private categoryService: CategoryService,private fb:FormBuilder
+    private categoryService: CategoryService,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.contactForm = this.fb.group({
       category: [null],
-      nameUnderCategory: [null]
+      nameUnderCategory: [null],
     });
     this.show = false;
-    
+
     this.underCategService.getAllUnderCat().subscribe(
       (res) => {
         this.undercategories = res;
@@ -54,24 +55,27 @@ export class UderCategoryAdminComponent implements OnInit {
   }
 
   onChange(value) {
-    this.underCategory.category = value
+    this.underCategory.category = value;
   }
- //addUnderCategory 
+  //addUnderCategory
   submit() {
-    console.log("Form Submitted")
-    console.log(this.contactForm.value.category)
-    this.underCategory.nameUnderCategory = this.contactForm.value.nameUnderCategory
-    console.log(this.underCategory.nameUnderCategory)
-    this.underCategService.addUndercategory(this.underCategory,this.contactForm.value.category).subscribe(() =>
-      this.underCategService.getAllUnderCat().subscribe((res) => {
-        this.undercategories = res;
-        this.show = true
-      })
-    );
+    console.log('Form Submitted');
+    console.log(this.contactForm.value.category);
+    this.underCategory.nameUnderCategory =
+      this.contactForm.value.nameUnderCategory;
+    console.log(this.underCategory.nameUnderCategory);
+    this.underCategService
+      .addUndercategory(this.underCategory, this.contactForm.value.category)
+      .subscribe(() =>
+        this.underCategService.getAllUnderCat().subscribe((res) => {
+          this.undercategories = res;
+          this.show = true;
+        })
+      );
   }
 
-  toggelToast(){
-    this.show = false
+  toggelToast() {
+    this.show = false;
   }
 
   swalWithBootstrapButtons = Swal.mixin({
@@ -83,7 +87,7 @@ export class UderCategoryAdminComponent implements OnInit {
   });
   //delete uNDERcATEGORY
   deleteUnderCategory(underCategory) {
-    console.log(underCategory)
+    console.log(underCategory);
     Swal.fire({
       icon: 'warning',
       title: 'Supprimer cette sous-catégorie',
@@ -103,8 +107,8 @@ export class UderCategoryAdminComponent implements OnInit {
           );
       } else if (result.isDismissed) {
         this.swalWithBootstrapButtons.fire(
-          'Annulé',
-          'Opération annulée',
+          'Annuler',
+          'Opération Annulere',
           'error'
         );
       }

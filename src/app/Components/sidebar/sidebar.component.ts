@@ -67,12 +67,20 @@ export class SidebarComponent implements OnInit {
         for (var i = 0; i < this.undercategories.length; i++) {
           var underCategory = this.undercategories[i];
           var category = this.undercategories[i].category;
-
           if (this.rightType(final, category) == null) {
             final.push({
               category: category.nameCategory,
               underCategories: [{ underCategory, products: [] }],
             });
+          } else {
+            for (var i = 0; i < final.length; i++) {
+              if (final[i].category == category.nameCategory) {
+                final[i].underCategories.push({
+                  underCategory,
+                  products: [],
+                });
+              }
+            }
           }
           this.underCategService
             .getProdsByIdUnderCat(this.undercategories[i].idUnderCategory)
@@ -86,7 +94,6 @@ export class SidebarComponent implements OnInit {
                     res
                   );
                 }
-
                 this.sidebar = final;
               },
               (err) => {

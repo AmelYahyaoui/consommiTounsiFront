@@ -2,17 +2,21 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a [routerLink]="['/home']" class="brand-link">
-      <img
-        src="assets/consommiTounsi.png"
-        alt="AdminLTE Logo"
-        class="brand-image img-circle elevation-3"
-        style="opacity: 0.8"
-      />
-      <span class="brand-text font-weight-light">Consommi Tounsi</span>
+      <div
+        style="display: grid; justify-content: center; justify-items: center"
+      >
+        <img
+          src="assets/consommiTounsi.png"
+          alt="AdminLTE Logo"
+          class="img-circle"
+          style="opacity: 0.8; width: 40%;height:90px"
+        />
+        <span class="brand-text font-weight-light">Consommi Tounsi</span>
+      </div>
     </a>
 
     <div class="sidebar">
-      <nav class="mt-2">
+      <nav style="margin-top:100px">
         <ul
           class="nav nav-pills nav-sidebar flex-column"
           data-widget="treeview"
@@ -84,7 +88,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a  [routerLink]="['/home/ads']" class="nav-link">
+            <a [routerLink]="['/home/ads']" class="nav-link">
               <i class="fab fa-adversal nav-icon"></i>
               <p>Publicités</p>
             </a>

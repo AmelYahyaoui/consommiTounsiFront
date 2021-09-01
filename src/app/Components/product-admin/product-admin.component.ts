@@ -26,7 +26,7 @@ export class ProductAdminComponent implements OnInit {
   file_upload: object;
   tunisianBarCodeCheck: string;
   tunisianBarCode: boolean;
-
+  barcode: any;
   constructor(
     private prodService: ProductService,
     private underCategoryService: UnderCategoryService,
@@ -69,13 +69,15 @@ export class ProductAdminComponent implements OnInit {
       let body = new FormData();
       body.append('file', this.file);
       this.prodService.ZxingReader(body).subscribe((res) => {
+        console.log(res)
         if (Array.isArray(res['results'])) {
           this.file_upload = res['results'][0].toString();
           var arr = this.file_upload.toString().split('');
           this.tunisianBarCodeCheck = arr.slice(0, 3).join('');
           this.tunisianBarCode = this.tunisianBarCodeCheck == '857';
-          this.contactForm.value.barcodeProduct = res['results'][0].toString()
-          console.log('hereee',this.contactForm.value.barcodeProduct)
+          this.barcode = res['results'][0].toString();
+
+          console.log('hereee', this.contactForm.value.barcodeProduct);
         } else {
           this.tunisianBarCode = false;
         }
@@ -88,7 +90,6 @@ export class ProductAdminComponent implements OnInit {
     }
   }
   resetForm() {
-    this.tunisianBarCode = false;
     this.tunisianBarCodeCheck = null;
     this.contactForm = this.fb.group({
       underCategoryIdUnderCategory: [null],
@@ -101,12 +102,11 @@ export class ProductAdminComponent implements OnInit {
       quantityProduct: [null],
       weightProduct: [null],
       fileName: [null],
-      barCode: [null],
     });
   }
   //addProduct
   submit() {
-    console.log(this.contactForm.value.barcodeProduct)
+    console.log(this.contactForm.value.barcodeProduct);
     if (this.contactForm.value.fileName) {
       var startIndex =
         this.contactForm.value.fileName.indexOf('\\') >= 0
@@ -118,6 +118,7 @@ export class ProductAdminComponent implements OnInit {
       }
       this.contactForm.value.fileName = filename;
     }
+    this.contactForm.value.barcodeProduct = this.barcode;
     console.log(this.contactForm.value);
     this.prodService
       .addProduct(
@@ -158,8 +159,8 @@ export class ProductAdminComponent implements OnInit {
         );
       } else if (result.isDismissed) {
         this.swalWithBootstrapButtons.fire(
-          'Annulé',
-          'Opération annulée',
+          'Annuler',
+          'Opération Annulere',
           'error'
         );
       }

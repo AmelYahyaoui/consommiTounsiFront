@@ -72,8 +72,8 @@ export class CategoryAdminComponent implements OnInit {
           );
       } else if (result.isDismissed) {
         this.swalWithBootstrapButtons.fire(
-          'Annulé',
-          'Opération annulée',
+          'Annuler',
+          'Opération Annulere',
           'error'
         );
       }

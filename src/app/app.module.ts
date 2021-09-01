@@ -66,7 +66,7 @@ const appRoutes: Routes = [
         component: EditPublicityComponent,
       },
       {
-        path: 'edit-prod/:id',
+        path: 'edit-product/:id',
         component: EditProductComponent,
       },
       {

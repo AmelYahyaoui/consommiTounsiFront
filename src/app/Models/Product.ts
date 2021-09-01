@@ -10,7 +10,7 @@ export class Product {
   weightProduct: number;
   maxQuantityProduct: number;
   fileName: string;
-  barcodeProduct: object;
+  barcodeProduct: string;
   underCategory: UnderCategory;
   likes: number;
   reduction: number;

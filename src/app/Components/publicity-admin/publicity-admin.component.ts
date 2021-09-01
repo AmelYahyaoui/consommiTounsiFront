@@ -19,7 +19,7 @@ export class PublicityAdminComponent implements OnInit {
   numberInitialViews: any;
   typesPublicity: any;
   showModel: Boolean;
-  edit:Boolean;
+  edit: Boolean;
   constructor(private publicityService: AdsService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
@@ -41,7 +41,7 @@ export class PublicityAdminComponent implements OnInit {
       typePublicity: [null],
       descriptionPublicity: [null],
     });
-    this.edit=false
+    this.edit = false;
     this.contactForm1 = this.fb.group({
       channelPublicity: [null],
       namePublicity: [null],
@@ -105,7 +105,6 @@ export class PublicityAdminComponent implements OnInit {
           this.publicities = res;
         });
       });
-
   }
 
   toggelModel() {
@@ -139,8 +138,8 @@ export class PublicityAdminComponent implements OnInit {
           );
       } else if (result.isDismissed) {
         this.swalWithBootstrapButtons.fire(
-          'Annulé',
-          'Opération annulée',
+          'Annuler',
+          'Opération Annulere',
           'error'
         );
       }
@@ -148,7 +147,7 @@ export class PublicityAdminComponent implements OnInit {
   }
   //editPublicité
   editPublicity(pub) {
-    this.edit = true
+    this.edit = true;
     this.publicityService.getPublicityById(pub.idPublicity).subscribe((res) => {
       this.contactForm1.value.channelPublicity = pub.channelPublicity;
       this.contactForm1.value.namePublicity = pub.channelPublicity;
@@ -160,7 +159,7 @@ export class PublicityAdminComponent implements OnInit {
       this.contactForm1.value.typePublicity = pub.typePublicity;
       this.contactForm1.value.descriptionPublicity = res.descriptionPublicity;
       this.contactForm1.value.targetPublicity = pub.targetPublicity;
-      this.contactForm1.value.fileName=res.fileName
+      this.contactForm1.value.fileName = res.fileName;
 
       console.log('form1', this.contactForm1);
     });

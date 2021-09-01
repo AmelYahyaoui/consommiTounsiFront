@@ -31,7 +31,7 @@ export class UnderCategoryService {
   }
 
   updateUnderCategory(idUderCat: number, value) {
-    return this.httpunderCat.put(this.updateUnderCatUrl + idUderCat, value);
+    return this.httpunderCat.put(this.updateUnderCatUrl, value);
   }
 
   getUnderCatById(idUnderCat: number) {

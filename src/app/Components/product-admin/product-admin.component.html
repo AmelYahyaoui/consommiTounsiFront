@@ -43,6 +43,7 @@
                   type="button"
                   style="margin: 0 10px"
                   class="btn btn-success"
+                  [routerLink]="['/home/edit-product', product.idProduct]"
                 >
                   <i class="fas fa-edit"></i>
                 </button>
@@ -102,6 +103,48 @@
               class="form-control"
               formControlName="titleProduct"
               placeholder="Titre du produit"
+            />
+            <br />
+            <textarea
+              type="text"
+              class="form-control"
+              formControlName="descriptionProduct"
+              placeholder="Description du produit"
+            ></textarea>
+            <br/>
+            <input
+              type="number"
+              class="form-control"
+              formControlName="buyingPriceProduct"
+              placeholder="Prix d'achat du produit"
+            />
+            <br />
+            <input
+              type="number"
+              class="form-control"
+              formControlName="priceProduct"
+              placeholder="Prix de vente du produit"
+            />
+            <br />
+            <input
+              type="number"
+              class="form-control"
+              formControlName="maxQuantityProduct"
+              placeholder="Quantité maximale du produit"
+            />
+            <br />
+            <input
+              type="number"
+              class="form-control"
+              formControlName="quantityProduct"
+              placeholder="Quantité du produit"
+            />
+            <br />
+            <input
+              type="number"
+              class="form-control"
+              formControlName="weightProduct"
+              placeholder="Poids du produit"
             />
             <br />
             <select

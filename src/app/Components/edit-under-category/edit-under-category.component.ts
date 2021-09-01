@@ -42,14 +42,12 @@ export class EditUnderCategoryComponent implements OnInit {
     private categoryService: CategoryService,
     private fb: FormBuilder
   ) {
-    console.log(this.router.url.slice(26));
     router.events.subscribe(() => {
       this.underCategService
         .getUnderCatById(Number(this.router.url.slice(26)))
         .subscribe(
           (res) => {
             this.underCategory = res;
-            console.log(this.underCategory);
           },
           (err) => {
             console.log(err);
@@ -70,23 +68,28 @@ export class EditUnderCategoryComponent implements OnInit {
         }
       );
 
-      this.categoryService.getAllCategories().subscribe(
-        (res) => {
-          this.categories = res;
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
+    this.categoryService.getAllCategories().subscribe(
+      (res) => {
+        this.categories = res;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
   redirectUnderCategory() {
     this.router.navigate(['/home/underCategories']);
   }
   editUnderCategory() {
-    console.log(this.underCategory)
-    this.underCategService.updateUnderCategory(this.underCategory.idUnderCategory,this.underCategory).subscribe((resp)=>{
-console.log(resp)
-this.router.navigate(['/home/underCategories']);
-    })
+    console.log(this.underCategory);
+    this.underCategService
+      .updateUnderCategory(
+        this.underCategory.idUnderCategory,
+        this.underCategory
+      )
+      .subscribe((resp) => {
+        console.log(resp);
+        this.router.navigate(['/home/undercategories']);
+      });
   }
 }

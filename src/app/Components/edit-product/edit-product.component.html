@@ -1,1 +1,141 @@
-<p>edit-product works!</p>
+<form
+  form
+  (submit)="editProduct()"
+  #codeForm="ngForm"
+  name="form"
+  *ngIf="product"
+>
+  <label> Nom du Produit: </label>
+  <input
+    type="text"
+    class="form-control"
+    #titleProduct
+    name="titleProduct"
+    [(ngModel)]="product.titleProduct"
+  />
+
+  <br />
+  <label> Description: </label>
+  <textarea
+    class="form-control"
+    #descriptionProduct
+    name="descriptionProduct"
+    rows="4"
+    style="margin-top: 0px; margin-bottom: 0px; height: 106px"
+    [(ngModel)]="product.descriptionProduct"
+    >{{ product.descriptionProduct }}
+
+  </textarea>
+
+  <br />
+  <label> Code à bar du Produit: </label>
+  <input
+    type="text"
+    class="form-control"
+    #barcodeProduct
+    disabled
+    name="barcodeProduct"
+    [(ngModel)]="product.barcodeProduct"
+  />
+
+  <br />
+  <label> Prix Produit: </label>
+  <input
+    type="number"
+    class="form-control"
+    #priceProduct
+    name="priceProduct"
+    [(ngModel)]="product.priceProduct"
+  />
+  <br />
+
+  <label> Quantité maximale du Produit: </label>
+  <input
+    type="number"
+    class="form-control"
+    #maxQuantityProduct
+    name="maxQuantityProduct"
+    [(ngModel)]="product.maxQuantityProduct"
+  />
+  <br />
+  <label> Quantité maximale du Produit: </label>
+  <input
+    type="number"
+    class="form-control"
+    #quantityProduct
+    name="quantityProduct"
+    [(ngModel)]="product.quantityProduct"
+  />
+  <br />
+  <label> Poids du Produit: </label>
+  <input
+    type="number"
+    class="form-control"
+    #weightProduct
+    name="weightProduct"
+    [(ngModel)]="product.weightProduct"
+  />
+  <br />
+  <label> Choix Du sous-Catégorie: </label><br />
+
+  <select
+    [(ngModel)]="product.underCategoryIdUnderCategory"
+    #underCategoryIdUnderCategory
+    name="underCategoryIdUnderCategory"
+    class="form-control"
+  >
+    <option [ngValue]="product.underCategroyIdUnderCategory" disabled>
+      {{ product.underCategory.nameUnderCategory }}
+    </option>
+    <option *ngFor="let category of underCategories" [ngValue]="category">
+      <span
+       
+      >
+        {{ category.nameUnderCategory }}
+      </span>
+    </option>
+  </select>
+  <br />
+
+  <!--<div
+    class="
+      custom-control
+      custom-switch
+      custom-switch-off-danger
+      custom-switch-on-success
+    "
+  >
+    <input type="checkbox"  [ngClass]="{ active: value }"class="custom-control-input" (change)="setValue(e.target.checked)" id="customSwitch3" />
+    <label class="custom-control-label" for="customSwitch3"
+      >Activer ou desactiver votre publicité</label
+    >
+  </div>
+  -->
+  <!--<label> Image du Publicité: </label>
+  <input
+  type="file"
+  class="form-control"
+  name="file"
+  formControlName="fileName"
+  placeholder="Image du publicité"
+  required
+/>
+          
+-->
+  <br />
+  <button
+    type="submit"
+    style="float: right; margin-top: 10px"
+    class="btn btn-info toastsDefaultSuccess"
+  >
+    Modifier
+  </button>
+  <button
+    type="button"
+    style="float: left; margin-top: 10px"
+    class="btn btn-danger toastsDefaultSuccess"
+    (click)="redirectProduct()"
+  >
+    Annuler
+  </button>
+</form>
