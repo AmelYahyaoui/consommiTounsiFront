@@ -24,7 +24,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let category of categories; let index = index">
+            <tr
+              [ngClass]="index % 2 != 0 ? 'blue-bg' : ''"
+              *ngFor="let category of categories; let index = index"
+            >
               <td>{{ category.idCategory }}</td>
               <td>{{ category.nameCategory }}</td>
               <td>
@@ -133,10 +136,7 @@
             />
 
             <span class="input-group-append">
-              <button
-                type="submit"
-                class="btn btn-info btn-flat"
-              >
+              <button type="submit" class="btn btn-info btn-flat">
                 Modifier
               </button>
             </span>

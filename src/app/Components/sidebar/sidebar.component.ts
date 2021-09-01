@@ -29,7 +29,11 @@ export class SidebarComponent implements OnInit {
     private categService: CategoryService,
     private underCategService: UnderCategoryService,
     private adService: AdsService
-  ) {}
+  ) {
+    router.events.subscribe(() => {
+      this.routeName = this.router.url;
+    });
+  }
   rightType(array, category) {
     var test = null;
     array.forEach((element) => {
@@ -40,6 +44,18 @@ export class SidebarComponent implements OnInit {
       }
     });
     return test;
+  }
+  fixCategory(array, category, underCategory) {
+    array.forEach((element, index) => {
+      if (
+        element.category.toLowerCase() == category.nameCategory.toLowerCase()
+      ) {
+        element.underCategories.push({
+          underCategory,
+          products: [],
+        });
+      }
+    });
   }
   fixUnderCategory(array, category, underCategory, products) {
     array.forEach((element) => {
@@ -73,14 +89,7 @@ export class SidebarComponent implements OnInit {
               underCategories: [{ underCategory, products: [] }],
             });
           } else {
-            for (var i = 0; i < final.length; i++) {
-              if (final[i].category == category.nameCategory) {
-                final[i].underCategories.push({
-                  underCategory,
-                  products: [],
-                });
-              }
-            }
+            this.fixCategory(final, category, underCategory);
           }
           this.underCategService
             .getProdsByIdUnderCat(this.undercategories[i].idUnderCategory)

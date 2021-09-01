@@ -18,6 +18,7 @@
           <thead>
             <tr>
               <th style="width: 10px">ID</th>
+              <th>Image</th>
               <th style="width: 10px">Nom de Sous-Catégorie</th>
               <th>Titre</th>
               <th>Description</th>
@@ -29,8 +30,23 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let product of products; let index = index">
+            <tr
+              [ngClass]="index % 2 != 0 ? 'blue-bg' : ''"
+              *ngFor="let product of products; let index = index"
+              
+            >
               <td>{{ product.idProduct }}</td>
+              <td>
+                <img
+                  src="{{
+                    'http://localhost:9091/SpringMVC/servlet/Imgarticles/' +
+                      product.idProduct
+                  }}"
+                  style="height: 80px"
+                  class="product-image"
+                  alt="Product Image"
+                />
+              </td>
               <td>{{ product.underCategory.nameUnderCategory }}</td>
               <td>{{ product.titleProduct }}</td>
               <td>{{ product.descriptionProduct }}</td>
@@ -111,7 +127,7 @@
               formControlName="descriptionProduct"
               placeholder="Description du produit"
             ></textarea>
-            <br/>
+            <br />
             <input
               type="number"
               class="form-control"

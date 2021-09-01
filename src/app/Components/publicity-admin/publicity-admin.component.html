@@ -33,7 +33,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let pub of publicities; let index = index">
+            <tr [ngClass]="index % 2 != 0 ? 'blue-bg' : ''" *ngFor="let pub of publicities; let index = index">
               <td>{{ pub.idPublicity }}</td>
               <td>{{ pub.channelPublicity }}</td>
               
@@ -54,7 +54,7 @@
               <td>
                 <button
                   type="button"
-                  style="margin: 0 10px"
+                  style="margin: 0 8px"
                   class="btn btn-success"
                   [routerLink]="['/home/edit-publicity', pub.idPublicity]"
                 >
@@ -62,7 +62,7 @@
                 </button>
                 <button
                   type="button"
-                  style="margin: 0 10px"
+                  style="margin: 0 8px"
                   class="btn btn-danger"
                   (click)="deletePublicity(pub)"
                 >
@@ -98,16 +98,13 @@
       </div>
       <div class="modal-body">
         <form [formGroup]="contactForm" (ngSubmit)="submit()">
-          <label>
-            Nom Publicité:
             <input
               type="text"
               class="form-control"
               formControlName="namePublicity"
+              placeholder="Nom Publicité"
             />
-          </label>
           <br />
-
           <select formControlName="channelPublicity" class="form-control">
             <option [ngValue]="null" disabled>choix canal</option>
             <option *ngFor="let category of channels" [ngValue]="category">
@@ -169,21 +166,21 @@
           <br />
           <label>
             Date début:
+          </label>
             <input
               type="date"
               class="form-control"
               formControlName="startDatePublicity"
             />
-          </label>
           <br />
           <label>
             Date fin:
+          </label>
             <input
               type="date"
               class="form-control"
               formControlName="endDatePublicity"
             />
-          </label>
           <br />
           <label> Description: </label>
           <textarea

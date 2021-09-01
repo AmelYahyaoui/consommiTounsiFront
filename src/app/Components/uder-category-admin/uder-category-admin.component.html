@@ -26,6 +26,7 @@
           <tbody>
             <tr
               *ngFor="let undercategory of undercategories; let index = index"
+              [ngClass]="index % 2 != 0 ? 'blue-bg' : ''"
             >
               <td>{{ undercategory.idUnderCategory }}</td>
               <td>{{ undercategory.category.nameCategory }}</td>
@@ -35,7 +36,10 @@
                   type="button"
                   style="margin: 0 10px"
                   class="btn btn-success"
-                  [routerLink]="['/home/edit-under-category', undercategory.idUnderCategory]"
+                  [routerLink]="[
+                    '/home/edit-under-category',
+                    undercategory.idUnderCategory
+                  ]"
                 >
                   <i class="fas fa-edit"></i>
                 </button>
@@ -76,34 +80,30 @@
       </div>
       <div class="modal-body">
         <form [formGroup]="contactForm" (ngSubmit)="submit()">
-          <label>
-            Nom sous-catégorie:
-            <input
-              type="text"
-              class="form-control"
-              formControlName="nameUnderCategory"
-            />
-          </label>
+          <label> Nom sous-catégorie: </label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="nameUnderCategory"
+          />
           <br />
-          <p>
-            <select formControlName="category" class="form-control">
-              <option [ngValue]="null" disabled>choix categorie</option>
-              <option
-                *ngFor="let category of categories"
-                [ngValue]="category.idCategory"
-              >
-                {{ category.nameCategory }}
-              </option>
-            </select>
-
-            <button
-              type="submit"
-              style="float: right; margin-top: 10px"
-              class="btn btn-info toastsDefaultSuccess"
+          <select formControlName="category" class="form-control">
+            <option [ngValue]="null" disabled>choix categorie</option>
+            <option
+              *ngFor="let category of categories"
+              [ngValue]="category.idCategory"
             >
-              Ajouter
-            </button>
-          </p>
+              {{ category.nameCategory }}
+            </option>
+          </select>
+
+          <button
+            type="submit"
+            style="float: right; margin-top: 10px"
+            class="btn btn-info toastsDefaultSuccess"
+          >
+            Ajouter
+          </button>
         </form>
 
         <div class="modal-footer justify-content-between"></div>
