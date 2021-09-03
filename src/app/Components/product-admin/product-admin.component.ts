@@ -20,6 +20,8 @@ import Swal from 'sweetalert2';
 })
 export class ProductAdminComponent implements OnInit {
   products: Array<Product>;
+  allProducts: Array<Product>;
+  searchText: any;
   undercategories: Array<UnderCategory>;
   contactForm: FormGroup;
   file: File;
@@ -49,6 +51,7 @@ export class ProductAdminComponent implements OnInit {
     this.prodService.getAllProducts().subscribe(
       (res) => {
         this.products = res;
+        this.allProducts = res;
       },
       (err) => {
         console.log(err);
@@ -69,7 +72,7 @@ export class ProductAdminComponent implements OnInit {
       let body = new FormData();
       body.append('file', this.file);
       this.prodService.ZxingReader(body).subscribe((res) => {
-        console.log(res)
+        console.log(res);
         if (Array.isArray(res['results'])) {
           this.file_upload = res['results'][0].toString();
           var arr = this.file_upload.toString().split('');
@@ -103,6 +106,41 @@ export class ProductAdminComponent implements OnInit {
       weightProduct: [null],
       fileName: [null],
     });
+  }
+  searchTable() {
+    if (!this.searchText.length) {
+      this.prodService.getAllProducts().subscribe(
+        (res) => {
+          this.products = res;
+          this.allProducts = res;
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    } else {
+      this.products = this.allProducts;
+      this.products = this.products.filter((element, keyy) => {
+        for (var key in element) {
+          if (typeof element[key] == 'string') {
+            if (
+              element[key].toLowerCase().includes(this.searchText.toLowerCase())
+            ) {
+              return true;
+            }
+          } else if (typeof element[key] == 'number') {
+            if (
+              element[key]
+                .toString()
+                .toLowerCase()
+                .includes(this.searchText.toLowerCase())
+            ) {
+              return true;
+            }
+          }
+        }
+      });
+    }
   }
   //addProduct
   submit() {

@@ -15,9 +15,11 @@ export class PublicityAdminComponent implements OnInit {
   contactForm1: FormGroup;
   cibles: any;
   channels: any;
+  searchText: any;
   file: File;
   numberInitialViews: any;
   typesPublicity: any;
+  allPubs: Array<Publicity>;
   showModel: Boolean;
   edit: Boolean;
   constructor(private publicityService: AdsService, private fb: FormBuilder) {}
@@ -58,6 +60,7 @@ export class PublicityAdminComponent implements OnInit {
     this.publicityService.getAllPublicities().subscribe(
       (res) => {
         this.publicities = res;
+        this.allPubs = res;
         console.log(this.publicities);
       },
       (err) => {
@@ -81,7 +84,41 @@ export class PublicityAdminComponent implements OnInit {
       descriptionPublicity: [null],
     });
   }
-
+  searchTable() {
+    if (!this.searchText.length) {
+      this.publicityService.getAllPublicities().subscribe(
+        (res) => {
+          this.publicities = res;
+          this.allPubs = res;
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    } else {
+      this.publicities = this.allPubs;
+      this.publicities = this.publicities.filter((element, keyy) => {
+        for (var key in element) {
+          if (typeof element[key] == 'string') {
+            if (
+              element[key].toLowerCase().includes(this.searchText.toLowerCase())
+            ) {
+              return true;
+            }
+          } else if (typeof element[key] == 'number') {
+            if (
+              element[key]
+                .toString()
+                .toLowerCase()
+                .includes(this.searchText.toLowerCase())
+            ) {
+              return true;
+            }
+          }
+        }
+      });
+    }
+  }
   //add publicity
   submit() {
     if (this.contactForm.value.fileName) {

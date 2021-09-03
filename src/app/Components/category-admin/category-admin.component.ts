@@ -15,6 +15,8 @@ import Swal from 'sweetalert2';
 })
 export class CategoryAdminComponent implements OnInit {
   categories: Array<Category>;
+  allCategories: Array<Category>;
+  searchText: any;
   category: Category;
   edit: Boolean;
   modal: Boolean;
@@ -29,11 +31,47 @@ export class CategoryAdminComponent implements OnInit {
     this.categService.getAllCategories().subscribe(
       (res) => {
         this.categories = res;
+        this.allCategories = res;
       },
       (err) => {
         console.log(err);
       }
     );
+  }
+  searchTable() {
+    if (!this.searchText.length) {
+      this.categService.getAllCategories().subscribe(
+        (res) => {
+          this.categories = res;
+          this.allCategories = res;
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    } else {
+      this.categories = this.allCategories;
+      this.categories = this.categories.filter((element, keyy) => {
+        for (var key in element) {
+          if (typeof element[key] == 'string') {
+            if (
+              element[key].toLowerCase().includes(this.searchText.toLowerCase())
+            ) {
+              return true;
+            }
+          } else if (typeof element[key] == 'number') {
+            if (
+              element[key]
+                .toString()
+                .toLowerCase()
+                .includes(this.searchText.toLowerCase())
+            ) {
+              return true;
+            }
+          }
+        }
+      });
+    }
   }
   //add category
   addCategory() {

@@ -17,8 +17,10 @@ import Swal from 'sweetalert2';
 })
 export class UderCategoryAdminComponent implements OnInit {
   undercategories: Array<UnderCategory>;
+  allUnderCategories: Array<UnderCategory>;
   underCategory: UnderCategory = new UnderCategory();
   categories: Array<Category>;
+  searchText: any;
   show: Boolean;
   @ViewChild('codeForm') codeForm: NgForm;
   @ViewChild('codeForm2') codeForm2: NgForm;
@@ -39,6 +41,7 @@ export class UderCategoryAdminComponent implements OnInit {
     this.underCategService.getAllUnderCat().subscribe(
       (res) => {
         this.undercategories = res;
+        this.allUnderCategories = res;
       },
       (err) => {
         console.log(err);
@@ -53,7 +56,41 @@ export class UderCategoryAdminComponent implements OnInit {
       }
     );
   }
-
+  searchTable() {
+    if (!this.searchText.length) {
+      this.underCategService.getAllUnderCat().subscribe(
+        (res) => {
+          this.undercategories = res;
+          this.allUnderCategories = res;
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    } else {
+      this.undercategories = this.allUnderCategories;
+      this.undercategories = this.undercategories.filter((element, keyy) => {
+        for (var key in element) {
+          if (typeof element[key] == 'string') {
+            if (
+              element[key].toLowerCase().includes(this.searchText.toLowerCase())
+            ) {
+              return true;
+            }
+          } else if (typeof element[key] == 'number') {
+            if (
+              element[key]
+                .toString()
+                .toLowerCase()
+                .includes(this.searchText.toLowerCase())
+            ) {
+              return true;
+            }
+          }
+        }
+      });
+    }
+  }
   onChange(value) {
     this.underCategory.category = value;
   }

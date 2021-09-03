@@ -109,14 +109,14 @@ export class EditProductComponent implements OnInit {
       }
       this.codeForm.value.fileName = filename;
     }*/
-    /*console.log('ediiiiittttttt', this.product);
+    console.log('ediiiiittttttt', this.product);
     this.prodSevice
       .updateproduct(this.product.idProduct, this.product)
       .subscribe((resp) => {
         console.log('after', resp);
         
-        this.router.navigate(['/home/ads']);
-      });*/
+        this.router.navigate(['/home/products']);
+      });
   }
   redirectProduct() {
     this.router.navigate(['/home/products']);
