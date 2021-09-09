@@ -66,28 +66,37 @@ export class ProductAdminComponent implements OnInit {
       }
     );
   }
+  // code a barre 
   fileChange(event: any) {
     if (event.target.files && event.target.files.length > 0) {
       this.file = event.target.files[0];
       let body = new FormData();
       body.append('file', this.file);
       this.prodService.ZxingReader(body).subscribe((res) => {
-        console.log(res);
+        console.log('result code a bar', res);
+        //bech na3mlou test est ce que res.results array wella
         if (Array.isArray(res['results'])) {
           this.file_upload = res['results'][0].toString();
           var arr = this.file_upload.toString().split('');
+          //bech nhezou 3 chiffres men res.results
           this.tunisianBarCodeCheck = arr.slice(0, 3).join('');
-          this.tunisianBarCode = this.tunisianBarCodeCheck == '857';
+          //bech na3mlou comparaison m3a code a barre li 7ajetna biha
+          this.tunisianBarCode = this.tunisianBarCodeCheck == '590';
+          //tunisianBarCode : variable responsable lel affichage : keni true bech tet7all forme ajout ; keni false bech yo5rej l'alert
           this.barcode = res['results'][0].toString();
-
-          console.log('hereee', this.contactForm.value.barcodeProduct);
         } else {
           this.tunisianBarCode = false;
         }
+        // ! kif tabda valeur mta3 tunisianBarCode mahich mawjouda == false
         if (!this.tunisianBarCode) {
-          alert(
-            `Votre produit n'est pas Tunisien. \n Veuillez insérer un produit Tunisien`
-          );
+          Swal.fire({
+            icon: 'warning',
+            title: `Ce produit n'est pas tunisien !! veuillez insérer un code à bar correcte`,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Réessayer',
+          });
         }
       });
     }

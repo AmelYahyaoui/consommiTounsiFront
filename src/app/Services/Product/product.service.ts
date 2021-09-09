@@ -41,7 +41,11 @@ export class ProductService {
     return this.prodhttp.delete(this.deleteProdUrl + id);
   }
   addProduct(product: Product, id: number) {
-    return this.prodhttp.post(`${this.addProdUrl}/${id}`, product, {});
+    return this.prodhttp.post(
+      'http://localhost:9091/SpringMVC/servlet/add-product/' + id,
+      product,
+      {}
+    );
   }
   updateproduct(id: number, product: Product) {
     return this.prodhttp.put(this.putProdUrl + id, product);

@@ -9,14 +9,12 @@ import { HeaderComponent } from '../app/Components/header/header.component';
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { LoginComponent } from './Components/login/login.component';
 import { HomeComponent } from './Components/home/home.component';
-import { AboutComponent } from './Components/about/about.component';
 import { CategoryAdminComponent } from './Components/category-admin/category-admin.component';
 import { ProductAdminComponent } from './Components/product-admin/product-admin.component';
 import { UderCategoryAdminComponent } from './Components/uder-category-admin/uder-category-admin.component';
 import { PublicityAdminComponent } from './Components/publicity-admin/publicity-admin.component';
 import { OneProductComponent } from './Components/one-product/one-product.component';
 import { HomeLandingComponent } from './Components/home-landing/home-landing.component';
-import { AddCategoryFormComponent } from './Components/add-category-form/add-category-form.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ProductsViewAllComponent } from './Components/products-view-all/products-view-all.component';
 import { EditProductComponent } from './components/edit-product/edit-product.component';
@@ -53,10 +51,7 @@ const appRoutes: Routes = [
         path: 'ads',
         component: PublicityAdminComponent,
       },
-      {
-        path: 'add-category',
-        component: AddCategoryFormComponent,
-      },
+
       {
         path: 'all-products',
         component: ProductsViewAllComponent,
@@ -86,14 +81,14 @@ const appRoutes: Routes = [
     SidebarComponent,
     LoginComponent,
     HomeComponent,
-    AboutComponent,
+
     CategoryAdminComponent,
     ProductAdminComponent,
     UderCategoryAdminComponent,
     PublicityAdminComponent,
     OneProductComponent,
     HomeLandingComponent,
-    AddCategoryFormComponent,
+
     ProductsViewAllComponent,
     EditProductComponent,
     EdiCategoryComponent,

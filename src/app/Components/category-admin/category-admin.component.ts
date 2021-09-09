@@ -75,6 +75,7 @@ export class CategoryAdminComponent implements OnInit {
   }
   //add category
   addCategory() {
+    console.log("addCat",this.codeForm.value)
     this.categService.addCategory(this.codeForm.value).subscribe(() =>
       this.categService.getAllCategories().subscribe((res) => {
         this.categories = res;

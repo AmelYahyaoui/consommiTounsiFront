@@ -5,6 +5,7 @@
         <h3 class="card-title">Publicités</h3>
         <div class="card-tools">
           <div class="input-group input-group-sm" style="width: 250px">
+            <i class="fas fa-search"></i>
             <input
               type="text"
               name="table_search"
@@ -33,6 +34,7 @@
           <thead>
             <tr>
               <th>ID</th>
+              <th>Image</th>
               <th style="width: 10px">canal Publicité</th>
               <th>Description</th>
               <th>Titre</th>
@@ -52,6 +54,15 @@
               *ngFor="let pub of publicities; let index = index"
             >
               <td>{{ pub.idPublicity }}</td>
+              <td><img
+                src="{{
+                  'http://localhost:9091/SpringMVC/servlet/ImgPublcities/' +
+                    pub.idPublicity
+                }}"
+                style="height: 80px"
+                class="product-image"
+                
+              /></td>
               <td>{{ pub.channelPublicity }}</td>
 
               <td>{{ pub.descriptionPublicity }}</td>

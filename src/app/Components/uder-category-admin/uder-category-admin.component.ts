@@ -100,7 +100,7 @@ export class UderCategoryAdminComponent implements OnInit {
     console.log(this.contactForm.value.category);
     this.underCategory.nameUnderCategory =
       this.contactForm.value.nameUnderCategory;
-    console.log(this.underCategory.nameUnderCategory);
+    console.log("params ad underCat",this.underCategory,this.contactForm.value.category);
     this.underCategService
       .addUndercategory(this.underCategory, this.contactForm.value.category)
       .subscribe(() =>
